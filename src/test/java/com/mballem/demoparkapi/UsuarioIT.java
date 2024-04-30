@@ -97,10 +97,10 @@ public class UsuarioIT {
     }
 
     @Test
-    public void buscarUsuario_ComIdExistentes_RetornandoUsuarioCriadoComStatus200() {
+    public void buscarUsuario_ComIdExistente_RetornarUsuarioComStatus200() {
         UsuarioResponseDto responseBody = testClient
                 .get()
-                .uri("/api/v1/usuarios")
+                .uri("/api/v1/usuarios/100")
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(UsuarioResponseDto.class)
