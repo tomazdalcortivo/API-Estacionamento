@@ -97,6 +97,22 @@ public class UsuarioIT {
     }
 
     @Test
+    public void buscarUsuario_ComIdExistentes_RetornandoUsuarioCriadoComStatus200() {
+        UsuarioResponseDto responseBody = testClient
+                .get()
+                .uri("/api/v1/usuarios")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(UsuarioResponseDto.class)
+                .returnResult().getResponseBody();
+
+        org.assertj.core.api.Assertions.assertThat(responseBody).isNotNull();
+        org.assertj.core.api.Assertions.assertThat(responseBody.getId()).isEqualTo(100);
+        org.assertj.core.api.Assertions.assertThat(responseBody.getUsername()).isEqualTo("ana@gmail.com");
+        org.assertj.core.api.Assertions.assertThat(responseBody.getRole()).isEqualTo("ADMIN");
+    }
+
+    @Test
     public void criarUsuario_ComPasswordInvalidos_RetornandoErrorMessageStatus422() {
         ErrorMessage responseBody = testClient
                 .post()
